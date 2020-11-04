@@ -33,18 +33,22 @@ def dict_to_tuples(dat):
 	freq.sort(reverse = True)
 	return freq
 
-def out_to_txt(dat):
-	with open('count.txt', 'w') as f:
+def out_to_txt(dat, file):
+	with open(file, 'w') as f:
 		for i in dat:
-			f.write('     '.join (str(s) for s in i) + '\n')
+			f.write('    '.join (str(s) for s in i) + '\n')
+
 
 if __name__ == '__main__':
 	file_path = "Shakespeare.txt"
+	out_path = "count.txt"
+	dfs_path = "hdfs://localhost:9000/SPtext/out.txt"
 	words = txt_WordsToList(file_path)
 	words_no_punct = removePunct(words)
 	lower_c_words = makeLowerCase(words_no_punct)
 	my_count = countWords(lower_c_words)
 	print(my_count)
-	out_to_txt(my_count)
+	out_to_txt(my_count, out_path)
+
 
 

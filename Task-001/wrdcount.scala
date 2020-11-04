@@ -8,13 +8,14 @@ import scala.collection.immutable.ListMap
 
 object wrdcount {
 	var file_path = "Shakespeare.txt"
+  var out_path = "out.txt"
+  var dfs_path = "hdfs://localhost:9000/SPtext/out.txt"
 
    def main(args: Array[String]) {
        var dat = readData(file_path)
        var my_count = countWords(dat)
        val sorted_map = sort_Map(my_count)
        printMap(sorted_map)
-
    }
 	
 	def readData(path: String): List[String] = {
@@ -46,4 +47,5 @@ object wrdcount {
     	// Printing out the data from the map.
     	for ((k,v) <- dat) printf("%s : %s\n", k, v)
     }
+
 }
