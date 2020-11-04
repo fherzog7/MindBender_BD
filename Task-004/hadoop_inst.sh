@@ -26,16 +26,15 @@ if [ ! -f ".bash_profile" ]; then
 	touch .bash_profile
 fi
 
-echo export HADOOP_HOME=~/opt/hadoop-2.7.3 > .bash_profile
-echo export HADOOP_INSTALL=$HADOOP_HOME > .bash_profile
-echo export HADOOP_MAPRED_HOME=$HADOOP_HOME > .bash_profile
-echo export HADOOP_COMMON_HOME=$HADOOP_HOME > .bash_profile
-echo export HADOOP_HDFS_HOME=$HADOOP_HOME > .bash_profile
-echo export YARN_HOME=$HADOOP_HOME > .bash_profile
-echo export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native > .bash_profile
-echo export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin > .bash_profile
+echo export HADOOP_HOME=~/opt/hadoop-2.7.3 >> .bash_profile
+echo export HADOOP_INSTALL=$HADOOP_HOME >> .bash_profile
+echo export HADOOP_MAPRED_HOME=$HADOOP_HOME >> .bash_profile
+echo export HADOOP_COMMON_HOME=$HADOOP_HOME >> .bash_profile
+echo export HADOOP_HDFS_HOME=$HADOOP_HOME >> .bash_profile
+echo export YARN_HOME=$HADOOP_HOME >> .bash_profile
+echo export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native >> .bash_profile
+echo export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin >> .bash_profile
 
-source .bash_profile
 
 # Setup Config Files
 cd ~/opt/hadoop-2.7.3/etc/hadoop
@@ -48,7 +47,7 @@ echo '<configuration>
 			<name>fs.default.name</name> 
 			<value>hdfs://localhost:9000</value> 
 		</property> 
-	</configuration>' > core-site.xml
+	</configuration>' >> core-site.xml
 
 
 echo '<configuration>
@@ -64,7 +63,7 @@ echo '<configuration>
 			<name>dfs.name.dir</name>
 			<value>file:///~/opt/hadoop-2.7.3/hdfs/datanode</value>
 		</property>
-	</configuration> ' > hdfs-site.xml
+	</configuration> ' >> hdfs-site.xml
 
 
 echo '<configuration>
@@ -72,7 +71,7 @@ echo '<configuration>
 		<name>yarn.nodemanager.aux-services</name>
 		<value>mapreduce_shuffle</value>
 	</property>
-</configuration>' > yarn-site.xml
+</configuration>' >> yarn-site.xml
 
 
 cp mapred-site.xml.template mapred-site.xml
@@ -82,7 +81,7 @@ echo '<configuration>
 			<name>mapreduce.framework.name</name>
 			<value>yarn</value>
 		</property>
-</configuration>' > mapred-site.xml
+</configuration>' >> mapred-site.xml
 
 cd ~
 

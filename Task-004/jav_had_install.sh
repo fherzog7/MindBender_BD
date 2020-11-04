@@ -25,3 +25,6 @@ else
 	bash ./hadoop_inst.sh
 fi
 
+cd ~
+
+echo "source .bash_profile" >> .bashrc
