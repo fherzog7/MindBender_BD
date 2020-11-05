@@ -5,6 +5,8 @@ cd ~
 
 #Update
 sudo apt-get update 
+
+#Make opt
 mkdir -p opt
 cd opt
 

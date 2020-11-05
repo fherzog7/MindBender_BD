@@ -7,7 +7,6 @@ sudo apt-get update
 
 #Make opt
 mkdir -p opt
-cd opt
 
 hd=$(hadoop version)
 jv=$(java -version)
