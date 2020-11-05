@@ -21,6 +21,8 @@ rm jdk-8u221-linux-x64.tar.gz
 #Go Home
 cd ~
 
+#Check if .bash_profile exists,
+#if not, create it.
 if [ ! -f ".bash_profile" ]; then
 	touch .bash_profile
 fi
@@ -29,4 +31,5 @@ fi
 echo "JAVA_HOME=~/opt/jdk1.8.0_221" >> .bash_profile
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> .bash_profile
 
+#Source
 source .bash_profile

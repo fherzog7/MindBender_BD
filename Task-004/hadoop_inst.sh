@@ -21,7 +21,7 @@ wget http://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.
 tar -xzf hadoop-2.7.3.tar.gz
 rm hadoop-2.7.3.tar.gz
 
-#Setup .Bash_Profile paths
+#Setup .Bash_Profile Paths
 cd ~
 
 if [ ! -f ".bash_profile" ]; then
@@ -48,35 +48,38 @@ sed -i "25s@.*@${jav_path}@" hadoop-env.sh
 sed -i 's/<configuration>/ /g' core-site.xml
 sed -i 's#</configuration># #g' core-site.xml
 
-echo '<configuration> 
-		<property> 
-			<name>fs.default.name</name> 
-			<value>hdfs://localhost:9000</value> 
-		</property> 
-	</configuration>' >> core-site.xml
+echo 
+'<configuration> 
+	<property> 
+		<name>fs.default.name</name> 
+		<value>hdfs://localhost:9000</value> 
+	</property> 
+</configuration>' >> core-site.xml
 
 sed -i 's/<configuration>/ /g' hdfs-site.xml
 sed -i 's#</configuration># #g' hdfs-site.xml
 
-echo '<configuration>
-		<property>
-			<name>dfs.replication</name>
-			<value>1</value>
-		</property>
-		<property>
-			<name>dfs.name.dir</name>
-			<value>file:///~/opt/hadoop-2.7.3/hdfs/namenode</value>
-		</property>
-		<property>
-			<name>dfs.name.dir</name>
-			<value>file:///~/opt/hadoop-2.7.3/hdfs/datanode</value>
-		</property>
-	</configuration> ' >> hdfs-site.xml
+echo 
+'<configuration>
+	<property>
+		<name>dfs.replication</name>
+		<value>1</value>
+	</property>
+	<property>
+		<name>dfs.name.dir</name>
+		<value>file:///~/opt/hadoop-2.7.3/hdfs/namenode</value>
+	</property>
+	<property>
+		<name>dfs.name.dir</name>
+		<value>file:///~/opt/hadoop-2.7.3/hdfs/datanode</value>
+	</property>
+</configuration> ' >> hdfs-site.xml
 
 sed -i 's/<configuration>/ /g' yarn-site.xml
 sed -i 's#</configuration># #g' yarn-site.xml
 
-echo '<configuration>
+echo 
+'<configuration>
 	<property>
 		<name>yarn.nodemanager.aux-services</name>
 		<value>mapreduce_shuffle</value>
@@ -89,11 +92,12 @@ cp mapred-site.xml.template mapred-site.xml
 sed -i 's/<configuration>/ /g' mapred-site.xml
 sed -i 's#</configuration># #g' mapred-site.xml
 
-echo '<configuration>
-		<property>
-			<name>mapreduce.framework.name</name>
-			<value>yarn</value>
-		</property>
+echo 
+'<configuration>
+	<property>
+		<name>mapreduce.framework.name</name>
+		<value>yarn</value>
+	</property>
 </configuration>' >> mapred-site.xml
 
 cd ~
