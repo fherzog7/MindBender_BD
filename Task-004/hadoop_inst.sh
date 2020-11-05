@@ -17,16 +17,18 @@ mkdir -p opt
 cd opt
 
 #Download and unpack
-sudo wget http://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+wget http://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
 tar -xzf hadoop-2.7.3.tar.gz
 rm hadoop-2.7.3.tar.gz
 
 #Setup .Bash_Profile paths
 cd ~
+
 if [ ! -f ".bash_profile" ]; then
 	touch .bash_profile
 fi
 
+echo "#HADOOP HOME" >> .bash_profile
 echo export HADOOP_HOME=~/opt/hadoop-2.7.3 >> .bash_profile
 echo export HADOOP_INSTALL=$HADOOP_HOME >> .bash_profile
 echo export HADOOP_MAPRED_HOME=$HADOOP_HOME >> .bash_profile
@@ -43,6 +45,9 @@ cd ~/opt/hadoop-2.7.3/etc/hadoop
 jav_path=$"export JAVA_HOME=~/opt/jdk1.8.0_221"
 sed -i "25s@.*@${jav_path}@" hadoop-env.sh
 
+sed -i 's/<configuration>/ /g' core-site.xml
+sed -i 's#</configuration># #g' core-site.xml
+
 echo '<configuration> 
 		<property> 
 			<name>fs.default.name</name> 
@@ -50,6 +55,8 @@ echo '<configuration>
 		</property> 
 	</configuration>' >> core-site.xml
 
+sed -i 's/<configuration>/ /g' hdfs-site.xml
+sed -i 's#</configuration># #g' hdfs-site.xml
 
 echo '<configuration>
 		<property>
@@ -66,6 +73,8 @@ echo '<configuration>
 		</property>
 	</configuration> ' >> hdfs-site.xml
 
+sed -i 's/<configuration>/ /g' yarn-site.xml
+sed -i 's#</configuration># #g' yarn-site.xml
 
 echo '<configuration>
 	<property>
@@ -76,6 +85,9 @@ echo '<configuration>
 
 
 cp mapred-site.xml.template mapred-site.xml
+
+sed -i 's/<configuration>/ /g' mapred-site.xml
+sed -i 's#</configuration># #g' mapred-site.xml
 
 echo '<configuration>
 		<property>
