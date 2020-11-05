@@ -7,6 +7,7 @@ cd ~
 sudo apt-get update 
 
 #Install / setup SSH key
+sudo apt-get install openssh-server
 ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 chmod 0600 ~/.ssh/authorized_keys
@@ -16,9 +17,9 @@ mkdir -p opt
 cd opt
 
 #Download and unpack
-sudo wget http://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3-src.tar.gz
-tar -xzf hadoop-2.7.3-src.tar.gz
-rm hadoop-2.7.3-src.tar.gz
+sudo wget http://archive.apache.org/dist/hadoop/common/hadoop-2.7.3/hadoop-2.7.3.tar.gz
+tar -xzf hadoop-2.7.3.tar.gz
+rm hadoop-2.7.3.tar.gz
 
 #Setup .Bash_Profile paths
 cd ~
