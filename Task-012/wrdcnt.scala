@@ -13,7 +13,7 @@ object SparkWordCount {
         .flatMap(line => line.split(" "))
         .map(word => (word, 1))
 
-    var counts = map.reduceByKey(_ + _)
+    val counts = data.reduceByKey(_+_)
 
 
     //val splitdata = data.flatMap(line => line.split(" "))
