@@ -10,11 +10,18 @@ def Process(rdd):
 		#lines = filtered.foreachRDD(lambda rdd: rdd.toDF())
 		df = ss.createDataFrame(rdd , schema=["id", "text"])
 		df.show()
+		df.write.saveAsTable(name="tweets",
+			format="hive", mode="append")
 
 sc = SparkContext("local[*]", "TwitterData")
 ssc = StreamingContext(sc, 10)
 
 ss = SparkSession.builder \
+	.appName(sc.appName) \
+	.config("spark.sql.warehouse.dir",
+		"/user/hive/warehouse") \
+	.config("hive.metastore.uris",
+		"thrift://localhost:9083") \
 	.enableHiveSupport() \
 	.getOrCreate()
 
@@ -22,15 +29,14 @@ kafkastream = KafkaUtils.createStream(ssc, "localhost:2181",
 	"tweets", {"tweets": 1})
 
 parsed = kafkastream.map(lambda x: json.loads(x[1]))
+#parsed.pprint()
 
 filtered = parsed.filter(lambda x: x.get("lang") == "en") \
 	.map(lambda x: (x.get("id"), x.get("text")))
 
 
-#filtered2 = parsed.flatmap(lambda x: (x.get("friends_count"), x.get("screen_name")))
-#filtered2.pprint()
 
-parsed.count().map(lambda x:'Tweets in this batch: %s' % x).pprint()
+parsed.count().map(lambda x:'# OF TWEETS IN BATCH: %s' % x).pprint()
 
 
 filtered.foreachRDD(Process)
