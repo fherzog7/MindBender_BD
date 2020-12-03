@@ -1,0 +1,7 @@
+[0m[[0m[31merror[0m] [0m[0m/home/eit/Desktop/bd/p3/CoinConsumer/src/main/scala/CoinConsumer.scala:22:11: schema2 is already defined as value schema2[0m
+[0m[[0m[31merror[0m] [0m[0m   	  val schema2 =[0m
+[0m[[0m[31merror[0m] [0m[0m   	      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/home/eit/Desktop/bd/p3/CoinConsumer/src/main/scala/CoinConsumer.scala:51:32: not found: value schema3[0m
+[0m[[0m[31merror[0m] [0m[0m	  	.select(from_json($"coin", schema3) as "coin")[0m
+[0m[[0m[31merror[0m] [0m[0m	  	                           ^[0m
+[0m[[0m[31merror[0m] [0m[0mtwo errors found[0m
