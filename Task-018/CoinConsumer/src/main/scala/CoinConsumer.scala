@@ -77,11 +77,11 @@ object CoinConsumer
 
       coin.printSchema()
 
-      coin.write
-        .options(Map(HBaseTableCatalog.tableCatalog -> catalog, 
-            HBaseTableCatalog.newTable -> 4))
-        .format("org.apache.spark.sql.execution.datasources.hbase")
-        .save()
+      //coin.write
+      //  .options(Map(HBaseTableCatalog.tableCatalog -> catalog, 
+      //      HBaseTableCatalog.newTable -> 4))
+      //  .format("org.apache.spark.sql.execution.datasources.hbase")
+      //  .save()
 
       val query = coin
       	.writeStream
