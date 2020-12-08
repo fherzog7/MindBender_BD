@@ -1,5 +1,6 @@
 import boto3
 import pydoop.hdfs as hdfs
+from os import path
 from botocore.exceptions import NoCredentialsError
 
 def upload_to_s3(s3, hdfs_path, bucket, KEY):
@@ -30,7 +31,8 @@ def readFromS3(s3, bucket, KEY):
 
 def downloadFile(s3, bucket, KEY):
     try:
-        obj = s3.Bucket(bucket).download_file(key, KEY)
+        print(path.splitext(file_name))
+        obj = s3.Bucket(bucket).download_file(KEY, KEY)
         return obj
         print("Download Successful")
     except FileNotFoundError:
