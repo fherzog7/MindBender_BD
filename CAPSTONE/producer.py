@@ -8,7 +8,7 @@ from time import sleep
 def getApi_Key():
 	with open("key.txt") as f:
 		return f.readline().rstrip()
-
+# get the user defined cl arguments
 def get_args():
 	parser = ArgumentParser()
 	parser.add_argument(
@@ -44,20 +44,21 @@ def get_args():
 
 #Kafka Topic
 TOPIC = "capTest"
-#Sandbox
+#Broker for Sandbox
 Broker0 = "sandbox-hdp.hortonworks.com:6667"
-#Local
+#Single Broker
 Broker1 = "localhost:9099"
 #Multiple Brokers
 BROKERS = ["localhost:9092","localhost:9093", "localhost:9094"]
 RUNNING = True
 api_key = getApi_Key()
-#LAT x LON of ~Georgia~
+# lat x lon of Atlanta
 geolocator = Nominatim(user_agent="Aircraft")
 Atl = geolocator.geocode("Atlanta, Georgia")
 Atl_coord = [Atl.latitude, Atl.longitude]
 
 lat, lon, distance, loc = get_args()
+# Set the lat and lon based on user defined inputs
 if loc != 1:
 	location = geolocator.geocode(loc)
 	lat, lon = str(location.latitude), str(location.longitude)
@@ -67,9 +68,9 @@ else:
 
 print("Getting ADSB data within a (("+distance+" Mile)) Radius of :: "+str(location))
 
-#Kafka Producer Object
+# create Kafka Producer Object
 producer = KafkaProducer(bootstrap_servers = Broker1)
-
+# Api url and headers
 url = "https://adsbexchange-com1.p.rapidapi.com/json/lat/"+lat+"/lon/"+lon+"/dist/"+distance+"/"
 
 headers = {
@@ -77,14 +78,14 @@ headers = {
     'x-rapidapi-host': "adsbexchange-com1.p.rapidapi.com"
     }
 
+# start making the calls
 while RUNNING:
-	sleep(2)
+	sleep(4)
 	resp = request("GET", url, headers=headers).text
 	print(resp)
 	producer.send(TOPIC, resp.encode('utf-8'))
-	print("Message Sent.")
-	sleep(10)
+	
 	print()
 	print("Message sent to Kafka.")
-
+	sleep(6)
 
