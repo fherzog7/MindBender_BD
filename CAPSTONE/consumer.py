@@ -5,11 +5,9 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F 
 from pyspark.sql.types import StringType, IntegerType
 from pyspark.sql.types import StructType, StructField
-from datetime import datetime
 from json import loads
 
-topic = "capTest"
-topic2 = "Aircraft"
+topic = "adsb"
 Z_K = "localhost:2181"
 AppName = "Aircraft"
 
@@ -47,7 +45,7 @@ def Process(rdd):
 					"trak as TrkAngle", "ttrk as ApHead",
 					"dst as Dist", "lat as LAT", "lon as LON", 
 					"postime as Timestmp") \
-		.replace("", "**")
+		.replace("", "**N/A**")
 		
 		df.write.saveAsTable(name="aircraft",
 			format="hive", mode="overwrite")
